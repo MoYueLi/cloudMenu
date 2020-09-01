@@ -1,0 +1,37 @@
+<view class='adminPerson'>
+	<!-- 菜谱分类列表 (菜谱分类列表) -->
+	<view class='cpfllb'>
+		<view wx:for="{{list}}" wx:key="_id">
+			<text class="txt">{{item.typeName}}</text>
+			<text class="btn" bind:tap="showDialog" data-id="{{item._id}}" style="background:#f1613c" >删除</text>
+			<text class="btn" style="background:#4578ff" bind:tap="changeType" data-id="{{item._id}}" data-type="update" data-typeName="{{item.typeName}}">修改</text>
+		</view>
+		<!-- 添加按钮 -->
+		<view data-type="add" bind:tap="changeType" class="fladd">
+			<image src="/static/personal/add.png"></image>
+		</view>
+
+	</view>
+	<!--    页面 （菜谱添加分类） -->
+	<view wx:if="{{isAdd}}" class='cptjfl'>
+
+		<mp-cell prop="mobile" ext-class=" weui-cell_vcode">
+			<!-- 输入菜谱分类 -->
+			<input class="weui-input" model:value="{{menuTypeName}}" placeholder="输入菜谱分类" />
+			<view slot="footer" class="weui-vcode-btn" bind:tap="add">添加</view>
+		</mp-cell>
+	</view>
+	<!-- 修改页面  （菜谱修改分类）-->
+	<view wx:if="{{isUpdate}}" class='cpxgfl'>
+
+		<mp-cell prop="mobile" ext-class=" weui-cell_vcode">
+			<!-- 输入菜谱分类 -->
+			<input model:value="{{menuTypeName}}" class="weui-input" placeholder="输入菜谱分类" />
+			<view slot="footer" class="weui-vcode-btn" bind:tap="updateType" >修改</view>
+		</mp-cell>
+
+	</view>
+
+</view>
+
+<mp-dialog show="{{isDel}}" title="是否删除该分类" buttons="{{dialogBtns}}" bindbuttontap="delType"></mp-dialog>
